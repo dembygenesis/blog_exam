@@ -4,6 +4,11 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+// ArticleId holds our newly created article id
+type ArticleId struct {
+	Id int `json:"id"`
+}
+
 // Article holds our database fields
 type Article struct {
 	Title   string `json:"title" db:"title" validate:"required,min=3,max=32"`
