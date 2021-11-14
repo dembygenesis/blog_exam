@@ -3,8 +3,8 @@ module github.com/dembygenesis/blog_exam
 go 1.16
 
 require (
-	github.com/aws/aws-sdk-go v1.42.4
 	github.com/friendsofgo/errors v0.9.2
+	github.com/go-playground/validator/v10 v10.9.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gofiber/fiber/v2 v2.21.0
 	github.com/joho/godotenv v1.4.0
