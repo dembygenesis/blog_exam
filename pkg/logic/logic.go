@@ -18,6 +18,7 @@ type Handler struct {
 	store store.Store
 }
 
+// NewLogicHandler instantiates a new handler
 func NewLogicHandler(store store.Store) Logic {
 	return &Handler{
 		store,

@@ -7,5 +7,6 @@ func (s *Server) AddArticle(c *fiber.Ctx) error {
 }
 
 func (s *Server) ReadArticles(c *fiber.Ctx) error {
+	s.logic.Read(3)
 	return c.SendString("ReadArticles")
 }
