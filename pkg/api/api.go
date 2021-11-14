@@ -11,13 +11,12 @@ import (
 	"syscall"
 )
 
-/**
-router        *mux.Router
-	SystemGroupID int
-	Logic         logic.Logic
-	port          int
-	ResData       resourcedata.ResourceData
-*/
+// Response holds our response structure
+type Response struct {
+	Status  int         `json:"status"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
 
 // Server holds our app variables
 type Server struct {
@@ -37,14 +36,6 @@ func NewServer(logic logic.Logic, port int) *Server {
 	}
 	s.SetRoutes()
 	return s
-}
-
-// SetRoutes configures the multiplexer
-func (s *Server) SetRoutes() {
-	api := s.app.Group("/article")
-
-	api.Get("/", s.ReadArticles)
-	api.Post("/", s.AddArticle)
 }
 
 // Start initialize a new fiber instance
