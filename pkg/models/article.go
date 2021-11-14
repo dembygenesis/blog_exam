@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/go-playground/validator/v10"
+	"strings"
 )
 
 // ArticleId holds our newly created article id
@@ -22,6 +23,14 @@ type ErrorResponse struct {
 	Tag         string
 	Value       string
 }
+
+// TrimSpaces trim's all the Article's white spaces
+func (a *Article) TrimSpaces() {
+	a.Title = strings.TrimSpace(a.Title)
+	a.Content = strings.TrimSpace(a.Content)
+	a.Author = strings.TrimSpace(a.Author)
+}
+
 
 // Validate checks struct data requirements
 func (a *Article) Validate() []*ErrorResponse {

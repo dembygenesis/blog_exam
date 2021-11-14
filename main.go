@@ -28,12 +28,16 @@ func main() {
 	// Setup store
 	var _store store.Store
 	if cfg.Database.Driver == "mysql" {
-		_store, err = mysql.NewMySQLStore(&cfg.Database)
+		// We use the MYSQL implementation for use
+		_store, err = mysql.NewStore(&cfg.Database)
 		if err != nil {
 			log.Fatalf("error establishing MYSQL store: %v", err.Error())
 		}
 	} else if cfg.Database.Driver == "mongo" {
-		_store = &mongo.Article{}
+		// We can add a mongo implementation here too, if desired.
+		_store, _ = mongo.NewStore()
+	} else {
+		log.Fatal("store is undefined")
 	}
 
 	// Setup logic handler

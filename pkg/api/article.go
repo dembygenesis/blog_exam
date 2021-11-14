@@ -33,9 +33,22 @@ func (s *Server) AddArticle(c *fiber.Ctx) error {
 		})
 	}
 
-
-
-	return c.JSON(body)
+	// Execute insert
+	res, err := s.logic.Create(body)
+	if err != nil {
+		status := http.StatusInternalServerError
+		return c.Status(status).JSON(Response{
+			Status:  status,
+			Message: fmt.Sprintf("error creating the article: %v", err.Error()),
+			Data:    errs,
+		})
+	}
+	status := http.StatusCreated
+	return c.Status(status).JSON(Response{
+		Status:  status,
+		Message: "Success",
+		Data:    res,
+	})
 }
 
 // ReadArticles api handler to for article data
