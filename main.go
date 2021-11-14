@@ -22,7 +22,7 @@ func main() {
 	// Set config
 	err = cfg.SetConfig()
 	if err != nil {
-		log.Fatal("error setting config: %v", err.Error())
+		log.Fatalf("error setting config: %v", err.Error())
 	}
 
 	// Setup store
@@ -42,6 +42,6 @@ func main() {
 	// Start server
 	err = server.Start()
 	if err != nil {
-		log.Fatal("error starting server: %v", err.Error())
+		log.Fatalf("error starting server: %v", err.Error())
 	}
 }
