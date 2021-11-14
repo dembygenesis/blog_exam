@@ -28,7 +28,10 @@ func main() {
 	// Setup store
 	var _store store.Store
 	if cfg.Database.Driver == "mysql" {
-		_store = &mysql.Article{}
+		_store, err = mysql.NewMySQLStore(&cfg.Database)
+		if err != nil {
+			log.Fatalf("error establishing MYSQL store: %v", err.Error())
+		}
 	} else if cfg.Database.Driver == "mongo" {
 		_store = &mongo.Article{}
 	}
