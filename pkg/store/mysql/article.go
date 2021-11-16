@@ -10,13 +10,12 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
+	"log"
 )
 
 // Create inserts a new article
 func (a *Article) Create(article models.Article) (*models.ArticleId, error) {
-	fmt.Println("Reached")
 	boilCtx := boil.WithDebug(context.Background(), true)
-	hasExisting := false
 	// Prep
 	article.TrimSpaces()
 
@@ -27,13 +26,11 @@ func (a *Article) Create(article models.Article) (*models.ArticleId, error) {
 	).All(boilCtx, a.conn)
 	if err != nil {
 		if !errors.Is(err, sql.ErrNoRows) {
-			return nil, fmt.Errorf("error trying to validate the article being added: %v", err.Error())
-		}
-		if len(exists)  == 1 {
-			hasExisting = true
+			log.Printf("error trying to validate the article being added: %v", err.Error())
+			return nil, fmt.Errorf("error trying to validate the article being added")
 		}
 	}
-	if hasExisting {
+	if len(exists) > 0 {
 		return nil, errors.New("error: record already exists")
 	}
 
@@ -45,7 +42,8 @@ func (a *Article) Create(article models.Article) (*models.ArticleId, error) {
 	}
 	err = entry.Insert(boilCtx, a.conn, boil.Infer())
 	if err != nil {
-		return nil, fmt.Errorf("error trying to insert a new entry: %v", err.Error())
+		log.Printf("error trying to insert a new entry: %v", err.Error())
+		return nil, errors.New("error trying to insert a new entry")
 	}
 
 	// Return
