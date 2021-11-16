@@ -2,7 +2,6 @@ package mysql
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/dembygenesis/blog_exam/pkg/models"
 	"github.com/friendsofgo/errors"
@@ -11,23 +10,16 @@ import (
 )
 
 func TestArticle_Create(t *testing.T) {
-	// Mock database
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Errorf("failed to init sqlmock: %v", err)
 		return
 	}
 
-	fmt.Println("mock", mock)
-	// ==============================
-	// Establish fields and args
-
-	// fields will be your inputs
 	type fields struct {
 		conn *sql.DB
 	}
 
-	// args will be your shit
 	type args struct {
 		article models.Article
 	}
