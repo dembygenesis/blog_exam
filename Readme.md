@@ -2,7 +2,7 @@
 
 #### Type in "sh start.sh" - boots up your Go and MYSQL environment
 
-#####*localhost:8080/articles [GET]
+####*localhost:8080/articles [GET]
 
 Input (N/A):
 ```json
@@ -25,7 +25,7 @@ Output:
 }
 ```
 
-#####*localhost:8080/articles [POST]
+####*localhost:8080/articles [POST]
 
 Input:
 ```json
