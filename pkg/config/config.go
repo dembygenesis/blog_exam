@@ -23,10 +23,6 @@ type Database struct {
 	Driver string `json:"driver"`
 }
 
-/*func (c *Config) ReadConfig(f string) (*Config, error) {
-
-}*/
-
 // ReadConfig reads the config file
 func ReadConfig(f string) (*Config, error) {
 	err := godotenv.Load(f)

@@ -7,6 +7,7 @@ import (
 	"github.com/dembygenesis/blog_exam/pkg/store"
 	"github.com/dembygenesis/blog_exam/pkg/store/mongo"
 	"github.com/dembygenesis/blog_exam/pkg/store/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	log "github.com/sirupsen/logrus"
 	"os"
 )
